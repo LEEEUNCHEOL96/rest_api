@@ -37,18 +37,29 @@ public class ApiV1ArticleController {
         return articleDTO;
     }
 
-    @PostMapping("") // 생성
-    public String create(){
-        return "등록";
+    @PostMapping("") // 등록
+    public ArticleDTO create(@RequestParam("subject") String subject, @RequestParam("content") String content){
+        Article article = new Article(subject,content);
+        ArticleDTO articleDTO = new ArticleDTO(article);
+
+        return articleDTO;
     }
 
     @PatchMapping("/{id}") // 수정
-    public String modify(@PathVariable("id") Long id){
+    public String modify(@PathVariable("id") Long id,
+                         @RequestParam("subject") String subject,
+                         @RequestParam("content") String content){
+        System.out.println(id);
+        System.out.println(subject);
+        System.out.println(content);
+
         return "수정";
     }
 
     @DeleteMapping("/{id}")  // 샂게
     public String delete(@PathVariable("id") Long id){
+        System.out.println(id);
+
         return "삭제";
     }
 }

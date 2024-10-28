@@ -27,9 +27,14 @@ public class ApiV1ArticleController {
         return articleDTOList;
     }
 
-    @GetExchange("/{id}") //단건조회
-    public String getArticle(){
-        return "단건조회";
+    @GetMapping("/{id}") //단건조회
+    public ArticleDTO getArticle(@PathVariable("id") Long id){
+
+        // articleDTOList.add(new ArticleDTO(new Article("단건","조회")));
+        Article article = new Article("단건","조회");
+        ArticleDTO articleDTO = new ArticleDTO(article);
+
+        return articleDTO;
     }
 
     @PostMapping("") // 생성
@@ -38,12 +43,12 @@ public class ApiV1ArticleController {
     }
 
     @PatchMapping("/{id}") // 수정
-    public String modify(){
+    public String modify(@PathVariable("id") Long id){
         return "수정";
     }
 
     @DeleteMapping("/{id}")  // 샂게
-    public String delete(){
+    public String delete(@PathVariable("id") Long id){
         return "삭제";
     }
 }

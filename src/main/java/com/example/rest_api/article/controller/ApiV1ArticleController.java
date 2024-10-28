@@ -3,6 +3,9 @@ package com.example.rest_api.article.controller;
 import com.example.rest_api.article.dto.ArticleDTO;
 import com.example.rest_api.article.entity.Article;
 import com.example.rest_api.article.service.ArticleService;
+import com.example.rest_api.giobal.jpa.RsData.RsData;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.service.annotation.GetExchange;
@@ -16,25 +19,37 @@ import java.util.List;
 public class ApiV1ArticleController {
     private final ArticleService articleService;
 
-    @GetMapping("") // 다건조회
-    public List<ArticleDTO> list(){
-        List<ArticleDTO> articleDTOList = new ArrayList<>();
+    @AllArgsConstructor
+    @Getter
+    public static class ArticlesResponse {
+        private final List<ArticleDTO> articleList;
+    }
+    @GetMapping("") //다건조회
+    public RsData<ArticlesResponse> list() {
+        List<ArticleDTO> articleList = new ArrayList<>();
 
-        articleDTOList.add(new ArticleDTO(new Article("제목1","내용1")));
-        articleDTOList.add(new ArticleDTO(new Article("제목2","내용2")));
-        articleDTOList.add(new ArticleDTO(new Article("제목3","내용3")));
+        articleList.add(new ArticleDTO(new Article("제목1","내용1")));
+        articleList.add(new ArticleDTO(new Article("제목2","내용2")));
+        articleList.add(new ArticleDTO(new Article("제목3","내용3")));
 
-        return articleDTOList;
+        return RsData.of("200", "게시글 다건 조회 성공", new ArticlesResponse(articleList));
     }
 
-    @GetMapping("/{id}") //단건조회
-    public ArticleDTO getArticle(@PathVariable("id") Long id){
+    @Getter
+    @AllArgsConstructor
+    public static class ArticleResponse {
+        private  final ArticleDTO article;
+    }
+
+
+    @GetMapping("/{id}") // 단건조회
+    public RsData<ArticleResponse> getArticle(@PathVariable("id") Long id) {
 
         // articleDTOList.add(new ArticleDTO(new Article("단건","조회")));
         Article article = new Article("단건","조회");
         ArticleDTO articleDTO = new ArticleDTO(article);
 
-        return articleDTO;
+        return RsData.of("200", "게시글 단건 조회 성공", new ArticleResponse(articleDTO));
     }
 
     @PostMapping("") // 생성

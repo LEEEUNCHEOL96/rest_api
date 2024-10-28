@@ -13,26 +13,26 @@ public class ApiV1ArticleController {
 
     @GetMapping("") // 다건조회
     public String list(){
-        return "ㅎ2";
+        return "목록";
     }
 
     @GetExchange("/{id}") //단건조회
     public String getArticle(){
-        return "";
+        return "단건조회";
     }
 
     @PostMapping("") // 생성
     public String create(){
-        return "";
+        return "등록";
     }
 
-    @PatchMapping("") // 수정
+    @PatchMapping("/{id}") // 수정
     public String modify(){
-        return "";
+        return "수정";
     }
 
     @DeleteMapping("/{id}")  // 샂게
     public String delete(){
-        return "";
+        return "삭제";
     }
 }

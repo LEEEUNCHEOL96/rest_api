@@ -4,7 +4,10 @@ import com.example.rest_api.article.dto.ArticleDTO;
 import com.example.rest_api.article.entity.Article;
 import com.example.rest_api.article.service.ArticleService;
 import com.example.rest_api.giobal.jpa.RsData.RsData;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -52,12 +55,20 @@ public class ApiV1ArticleController {
         return RsData.of("200", "게시글 단건 조회 성공", new ArticleResponse(articleDTO));
     }
 
-    @PostMapping("") // 등록
-    public ArticleDTO create(@RequestParam("subject") String subject, @RequestParam("content") String content){
-        Article article = new Article(subject,content);
-        ArticleDTO articleDTO = new ArticleDTO(article);
+    @Data // gettet settet 같은 lombok 에서 기본을 다 제공하는 어노테이션
+    public static class ArticleRequest{
+        @NotBlank
+        private String subject;
+        @NotBlank
+        private String content;
+    }
 
-        return articleDTO;
+    @PostMapping("") // 등록
+    public String create(@Valid @RequestBody ArticleRequest articleRequest){
+        System.out.println(articleRequest.getSubject());
+        System.out.println(articleRequest.getContent());
+
+        return "동록완료";
     }
 
     @PatchMapping("/{id}") // 수정

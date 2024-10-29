@@ -23,11 +23,7 @@ public class ApiV1ArticleController {
 
     @GetMapping("") //다건조회
     public RsData<ArticlesResponse> list() {
-        List<ArticleDTO> articleList = new ArrayList<>();
-
-        articleList.add(new ArticleDTO(new Article("제목1","내용1")));
-        articleList.add(new ArticleDTO(new Article("제목2","내용2")));
-        articleList.add(new ArticleDTO(new Article("제목3","내용3")));
+        List<ArticleDTO> articleList = this.articleService.getList();
 
         return RsData.of("200", "게시글 다건 조회 성공", new ArticlesResponse(articleList));
     }
@@ -36,10 +32,7 @@ public class ApiV1ArticleController {
 
     @GetMapping("/{id}") // 단건조회
     public RsData<ArticleResponse> getArticle(@PathVariable("id") Long id) {
-
-        // articleDTOList.add(new ArticleDTO(new Article("단건","조회")));
-        Article article = new Article("단건","조회");
-        ArticleDTO articleDTO = new ArticleDTO(article);
+        ArticleDTO articleDTO = this.articleService.getArticle(id);
 
         return RsData.of("200", "게시글 단건 조회 성공", new ArticleResponse(articleDTO));
     }

@@ -3,7 +3,9 @@ package com.example.rest_api.article.controller;
 import com.example.rest_api.article.dto.ArticleDTO;
 import com.example.rest_api.article.entity.Article;
 import com.example.rest_api.article.request.ArticleCreateRequest;
+import com.example.rest_api.article.request.ArticleCreateResponse;
 import com.example.rest_api.article.request.ArticleModifyRequest;
+import com.example.rest_api.article.request.ArticleModifyResponse;
 import com.example.rest_api.article.response.ArticleResponse;
 import com.example.rest_api.article.response.ArticlesResponse;
 import com.example.rest_api.article.service.ArticleService;
@@ -20,7 +22,6 @@ import java.util.List;
 public class ApiV1ArticleController {
     private final ArticleService articleService;
 
-
     @GetMapping("") //다건조회
     public RsData<ArticlesResponse> list() {
         List<ArticleDTO> articleList = this.articleService.getList();
@@ -28,31 +29,33 @@ public class ApiV1ArticleController {
         return RsData.of("200", "게시글 다건 조회 성공", new ArticlesResponse(articleList));
     }
 
-
-
     @GetMapping("/{id}") // 단건조회
     public RsData<ArticleResponse> getArticle(@PathVariable("id") Long id) {
-        ArticleDTO articleDTO = this.articleService.getArticle(id);
+        Article  article = this.articleService.getArticle(id);
+        ArticleDTO articleDTO = new ArticleDTO(article);
 
         return RsData.of("200", "게시글 단건 조회 성공", new ArticleResponse(articleDTO));
     }
 
 
     @PostMapping("") // 등록
-    public String create(@Valid @RequestBody ArticleCreateRequest articleCreateRequest){
-        System.out.println(articleCreateRequest.getSubject());
-        System.out.println(articleCreateRequest.getContent());
+    public RsData<ArticleCreateResponse> create (@Valid @RequestBody ArticleCreateRequest articleCreateRequest){
+         Article article = this.articleService.write(articleCreateRequest.getSubject(),articleCreateRequest.getContent());
 
-        return "동록완료";
+         return RsData.of("200","등록성공", new ArticleCreateResponse(article));
     }
 
     @PatchMapping("/{id}") // 수정
-    public String modify(@PathVariable("id") Long id,@Valid @RequestBody ArticleModifyRequest articleModifyRequest){
-        System.out.println(id);
-        System.out.println(articleModifyRequest.getSubject());
-        System.out.println(articleModifyRequest.getContent());
+    public RsData<ArticleModifyResponse> modify(@PathVariable("id") Long id, @Valid @RequestBody ArticleModifyRequest articleModifyRequest) {
+        Article article = this.articleService.getArticle(id);
 
-        return "수정완료";
+        if (article == null) return RsData.of(
+                "500",
+                "%d 번 게시물은 존재하지 않습니다.".formatted(id),
+                null
+        );
+        article = this.articleService.update(article, articleModifyRequest.getSubject(), articleModifyRequest.getContent());
+        return RsData.of("200", "수정성공", new ArticleModifyResponse(article));
     }
 
     @DeleteMapping("/{id}")  // 삭제

@@ -59,9 +59,17 @@ public class ApiV1ArticleController {
     }
 
     @DeleteMapping("/{id}")  // 삭제
-    public String delete(@PathVariable("id") Long id){
-        System.out.println(id);
+    public RsData<ArticleResponse> delete(@PathVariable("id") Long id){
+        Article article = this.articleService.getArticle(id);
+        if (article == null)return RsData.of(
+                "500",
+                "%d 번 게시물은 존재하지 않습니다.".formatted(id),
+                null
+        );
 
-        return "삭제";
+        this.articleService.delete(article);
+        ArticleDTO articleDTO = new ArticleDTO(article);
+
+        return RsData.of("200","삭제성공", new ArticleResponse(articleDTO));
     }
 }

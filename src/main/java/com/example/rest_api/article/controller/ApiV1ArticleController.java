@@ -2,6 +2,10 @@ package com.example.rest_api.article.controller;
 
 import com.example.rest_api.article.dto.ArticleDTO;
 import com.example.rest_api.article.entity.Article;
+import com.example.rest_api.article.request.ArticleCreateRequest;
+import com.example.rest_api.article.request.ArticleModifyRequest;
+import com.example.rest_api.article.response.ArticleResponse;
+import com.example.rest_api.article.response.ArticlesResponse;
 import com.example.rest_api.article.service.ArticleService;
 import com.example.rest_api.giobal.jpa.RsData.RsData;
 import jakarta.validation.Valid;
@@ -22,11 +26,7 @@ import java.util.List;
 public class ApiV1ArticleController {
     private final ArticleService articleService;
 
-    @AllArgsConstructor
-    @Getter
-    public static class ArticlesResponse {
-        private final List<ArticleDTO> articleList;
-    }
+
     @GetMapping("") //다건조회
     public RsData<ArticlesResponse> list() {
         List<ArticleDTO> articleList = new ArrayList<>();
@@ -38,11 +38,6 @@ public class ApiV1ArticleController {
         return RsData.of("200", "게시글 다건 조회 성공", new ArticlesResponse(articleList));
     }
 
-    @Getter
-    @AllArgsConstructor
-    public static class ArticleResponse {
-        private  final ArticleDTO article;
-    }
 
 
     @GetMapping("/{id}") // 단건조회
@@ -55,27 +50,20 @@ public class ApiV1ArticleController {
         return RsData.of("200", "게시글 단건 조회 성공", new ArticleResponse(articleDTO));
     }
 
-    @Data // gettet settet 같은 lombok 에서 기본을 다 제공하는 어노테이션
-    public static class ArticleRequest{
-        @NotBlank
-        private String subject;
-        @NotBlank
-        private String content;
-    }
 
     @PostMapping("") // 등록
-    public String create(@Valid @RequestBody ArticleRequest articleRequest){
-        System.out.println(articleRequest.getSubject());
-        System.out.println(articleRequest.getContent());
+    public String create(@Valid @RequestBody ArticleCreateRequest articleCreateRequest){
+        System.out.println(articleCreateRequest.getSubject());
+        System.out.println(articleCreateRequest.getContent());
 
         return "동록완료";
     }
 
     @PatchMapping("/{id}") // 수정
-    public String modify(@PathVariable("id") Long id,@Valid @RequestBody ArticleRequest articleRequest){
+    public String modify(@PathVariable("id") Long id,@Valid @RequestBody ArticleModifyRequest articleModifyRequest){
         System.out.println(id);
-        System.out.println(articleRequest.getSubject());
-        System.out.println(articleRequest.getContent());
+        System.out.println(articleModifyRequest.getSubject());
+        System.out.println(articleModifyRequest.getContent());
 
         return "수정완료";
     }

@@ -1,6 +1,6 @@
 package com.example.rest_api.article.entity;
 
-import com.example.rest_api.giobal.jpa.BaseEntity;
+import com.example.rest_api.global.jpa.BaseEntity;
 import jakarta.persistence.Entity;
 import lombok.*;
 import lombok.experimental.SuperBuilder;

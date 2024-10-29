@@ -1,4 +1,4 @@
-package com.example.rest_api.giobal.jpa;
+package com.example.rest_api.global.jpa;
 
 import jakarta.persistence.*;
 import lombok.AccessLevel;

@@ -7,20 +7,14 @@ import com.example.rest_api.article.request.ArticleModifyRequest;
 import com.example.rest_api.article.response.ArticleResponse;
 import com.example.rest_api.article.response.ArticlesResponse;
 import com.example.rest_api.article.service.ArticleService;
-import com.example.rest_api.giobal.jpa.RsData.RsData;
+import com.example.rest_api.global.jpa.RsData.RsData;
 import jakarta.validation.Valid;
-import jakarta.validation.constraints.NotBlank;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.service.annotation.GetExchange;
-
 import java.util.ArrayList;
 import java.util.List;
 
-@RestController // 문자를 데이터 형태로 넘겨줌
+@RestController // JSON 형태로 응답을 반환함
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/articles")
 public class ApiV1ArticleController {
@@ -68,7 +62,7 @@ public class ApiV1ArticleController {
         return "수정완료";
     }
 
-    @DeleteMapping("/{id}")  // 샂게
+    @DeleteMapping("/{id}")  // 삭제
     public String delete(@PathVariable("id") Long id){
         System.out.println(id);
 

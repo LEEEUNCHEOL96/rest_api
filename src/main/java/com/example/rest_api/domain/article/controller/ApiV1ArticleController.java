@@ -9,7 +9,7 @@ import com.example.rest_api.domain.article.request.ArticleModifyResponse;
 import com.example.rest_api.domain.article.response.ArticleResponse;
 import com.example.rest_api.domain.article.response.ArticlesResponse;
 import com.example.rest_api.domain.article.service.ArticleService;
-import com.example.rest_api.global.jpa.RsData.RsData;
+import com.example.rest_api.global.RsData.RsData;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
@@ -47,7 +47,7 @@ public class ApiV1ArticleController {
     @PostMapping("") // 등록
     @Operation(summary = "게시글 등록") // SWAGGER API 문서
     public RsData<ArticleCreateResponse> create (@Valid @RequestBody ArticleCreateRequest articleCreateRequest){
-         Article article = this.articleService.write(articleCreateRequest.getSubject(),articleCreateRequest.getContent(), articleCreateRequest.g);
+         Article article = this.articleService.write(articleCreateRequest.getSubject(),articleCreateRequest.getContent());
 
          return RsData.of("200","등록성공", new ArticleCreateResponse(article));
     }

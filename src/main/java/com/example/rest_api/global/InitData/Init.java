@@ -1,4 +1,4 @@
-package com.example.rest_api.global.jpa.InitData;
+package com.example.rest_api.global.InitData;
 
 import com.example.rest_api.domain.article.service.ArticleService;
 import com.example.rest_api.domain.member.service.MemberService;

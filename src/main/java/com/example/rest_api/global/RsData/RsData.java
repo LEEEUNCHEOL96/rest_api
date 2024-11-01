@@ -1,4 +1,4 @@
-package com.example.rest_api.global.jpa.RsData;
+package com.example.rest_api.global.RsData;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;

@@ -1,6 +1,6 @@
 package com.example.rest_api.global.jpa.InitData;
 
-import com.example.rest_api.article.service.ArticleService;
+import com.example.rest_api.domain.article.service.ArticleService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

@@ -1,10 +1,8 @@
-package com.example.rest_api.article.service;
+package com.example.rest_api.domain.article.service;
 
-import com.example.rest_api.article.dto.ArticleDTO;
-import com.example.rest_api.article.entity.Article;
-import com.example.rest_api.article.repository.ArticleRepository;
-import com.example.rest_api.global.jpa.RsData.RsData;
-import jakarta.validation.constraints.NotBlank;
+import com.example.rest_api.domain.article.dto.ArticleDTO;
+import com.example.rest_api.domain.article.entity.Article;
+import com.example.rest_api.domain.article.repository.ArticleRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

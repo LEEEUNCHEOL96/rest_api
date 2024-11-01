@@ -1,11 +1,7 @@
-package com.example.rest_api.article.dto;
+package com.example.rest_api.domain.article.dto;
 
-import com.example.rest_api.article.entity.Article;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.example.rest_api.domain.article.entity.Article;
 import lombok.Getter;
-import org.springframework.data.annotation.LastModifiedDate;
 
 import java.time.LocalDateTime;
 

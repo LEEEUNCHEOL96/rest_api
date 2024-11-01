@@ -1,6 +1,6 @@
-package com.example.rest_api.article.repository;
+package com.example.rest_api.domain.article.repository;
 
-import com.example.rest_api.article.entity.Article;
+import com.example.rest_api.domain.article.entity.Article;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

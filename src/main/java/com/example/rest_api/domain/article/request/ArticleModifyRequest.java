@@ -1,4 +1,4 @@
-package com.example.rest_api.article.request;
+package com.example.rest_api.domain.article.request;
 
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;

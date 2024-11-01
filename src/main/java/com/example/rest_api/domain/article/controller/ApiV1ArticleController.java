@@ -1,14 +1,14 @@
-package com.example.rest_api.article.controller;
+package com.example.rest_api.domain.article.controller;
 
-import com.example.rest_api.article.dto.ArticleDTO;
-import com.example.rest_api.article.entity.Article;
-import com.example.rest_api.article.request.ArticleCreateRequest;
-import com.example.rest_api.article.request.ArticleCreateResponse;
-import com.example.rest_api.article.request.ArticleModifyRequest;
-import com.example.rest_api.article.request.ArticleModifyResponse;
-import com.example.rest_api.article.response.ArticleResponse;
-import com.example.rest_api.article.response.ArticlesResponse;
-import com.example.rest_api.article.service.ArticleService;
+import com.example.rest_api.domain.article.dto.ArticleDTO;
+import com.example.rest_api.domain.article.entity.Article;
+import com.example.rest_api.domain.article.request.ArticleCreateRequest;
+import com.example.rest_api.domain.article.request.ArticleCreateResponse;
+import com.example.rest_api.domain.article.request.ArticleModifyRequest;
+import com.example.rest_api.domain.article.request.ArticleModifyResponse;
+import com.example.rest_api.domain.article.response.ArticleResponse;
+import com.example.rest_api.domain.article.response.ArticlesResponse;
+import com.example.rest_api.domain.article.service.ArticleService;
 import com.example.rest_api.global.jpa.RsData.RsData;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;

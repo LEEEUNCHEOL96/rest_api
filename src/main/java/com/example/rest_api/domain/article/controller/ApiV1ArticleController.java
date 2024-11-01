@@ -47,7 +47,7 @@ public class ApiV1ArticleController {
     @PostMapping("") // 등록
     @Operation(summary = "게시글 등록") // SWAGGER API 문서
     public RsData<ArticleCreateResponse> create (@Valid @RequestBody ArticleCreateRequest articleCreateRequest){
-         Article article = this.articleService.write(articleCreateRequest.getSubject(),articleCreateRequest.getContent());
+         Article article = this.articleService.write(articleCreateRequest.getSubject(),articleCreateRequest.getContent(), articleCreateRequest.g);
 
          return RsData.of("200","등록성공", new ArticleCreateResponse(article));
     }

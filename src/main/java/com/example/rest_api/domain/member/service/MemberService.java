@@ -12,12 +12,20 @@ public class MemberService {
     private final MemberRepository memberRepository;
     private final PasswordEncoder passwordEncoder;
 
-    public void join (String username, String password){
+    public Member join (String username, String password){
+
+        Member checkedMember = this.memberRepository.findByUsername(username);
+        if(checkedMember != null){
+            throw new RuntimeException("이미 회원가입하였습니다.");
+        }
+
         Member member = Member.builder()
                 .username(username)
                 .password(passwordEncoder.encode(password)) // 시큐리티 도입
                 .build();
 
         this.memberRepository.save(member);
+
+        return member;
     }
 }

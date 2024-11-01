@@ -3,6 +3,7 @@ package com.example.rest_api.domain.article.service;
 import com.example.rest_api.domain.article.dto.ArticleDTO;
 import com.example.rest_api.domain.article.entity.Article;
 import com.example.rest_api.domain.article.repository.ArticleRepository;
+import com.example.rest_api.domain.member.entity.Member;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -33,6 +34,16 @@ public class ArticleService {
         Article article = Article.builder()
                 .subject(subject)
                 .content(content)
+                .build();
+        this.articleRepository.save(article);
+        return article;
+    }
+
+    public Article write(String subject, String content, Member member) {  // init date 기입용 오버라이드
+        Article article = Article.builder()
+                .subject(subject)
+                .content(content)
+                .member(member)
                 .build();
         this.articleRepository.save(article);
         return article;

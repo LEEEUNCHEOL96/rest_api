@@ -5,13 +5,12 @@ import com.example.rest_api.domain.member.entity.Member;
 import com.example.rest_api.domain.member.request.MemberRequest;
 import com.example.rest_api.domain.member.service.MemberService;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
@@ -28,4 +27,21 @@ public class ApiV1MemberController {
 
         return ResponseEntity.ok(new MemberDTO(member));
     }
+
+    @PostMapping("/login")
+    public ResponseEntity login (@Valid @RequestBody MemberRequest memberRequest, HttpSession httpSession) {
+        Member member = this.memberService.getMember(memberRequest.getUsername());
+        if (member == null) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("존재하지 않는 회원입니다.");
+        }
+        httpSession.setAttribute("USER_ID", member.getUsername());
+        return ResponseEntity.ok("로그인 성공");
+    }
+
+    @GetMapping("/logout")
+    public ResponseEntity logout(HttpSession httpSession) {
+        httpSession.invalidate();
+        return ResponseEntity.ok("로그아웃 성공");
+    }
+
 }

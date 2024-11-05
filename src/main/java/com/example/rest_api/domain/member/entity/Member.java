@@ -20,4 +20,7 @@ public class Member extends BaseEntity {
 
     @JsonIgnore // 민감한 정보 노출 방지 ex) 회원개인 정보, 주민번호, 비밀번호 등
     private String password;
+
+    @JsonIgnore
+    private String refreshToken;
 }

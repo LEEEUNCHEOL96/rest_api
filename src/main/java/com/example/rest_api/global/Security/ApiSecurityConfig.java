@@ -13,6 +13,8 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableWebSecurity
 @RequiredArgsConstructor
 public class ApiSecurityConfig {
+    private final JwtAuthorizationFilter jwtAuthorizationFilter;
+
     @Bean
     SecurityFilterChain apifilterChain(HttpSecurity http) throws Exception {
         http

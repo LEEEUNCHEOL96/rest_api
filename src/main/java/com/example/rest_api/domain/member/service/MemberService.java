@@ -27,7 +27,7 @@ public class MemberService {
     }
 
 
-    public Member getMember (String username) {
+    public Member getMember(String username) {
         return this.memberRepository.findByUsername(username);
     }
 }

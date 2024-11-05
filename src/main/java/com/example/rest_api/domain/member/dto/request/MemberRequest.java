@@ -1,4 +1,4 @@
-package com.example.rest_api.domain.member.request;
+package com.example.rest_api.domain.member.dto.request;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.validation.constraints.NotBlank;

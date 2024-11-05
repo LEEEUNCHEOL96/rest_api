@@ -13,10 +13,10 @@ public class Init {
     CommandLineRunner initData(ArticleService articleService, MemberService memberService) {
         return args -> {
             Member admin = memberService.join("admin", "1234");
-            Member user1 = memberService.join("user1", "1234");
-            Member user2 = memberService.join("user2", "1234");
-            Member user3 = memberService.join("user3", "1234");
-            Member user4 = memberService.join("user4", "1234");
+            Member user1 =memberService.join("user1", "1234");
+            Member user2 =memberService.join("user2", "1234");
+            Member user3 =memberService.join("user3", "1234");
+            Member user4 =memberService.join("user4", "1234");
 
             articleService.write("제목 1", "내용 1", admin);
             articleService.write("제목 2", "내용 2", user1);

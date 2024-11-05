@@ -2,12 +2,12 @@ package com.example.rest_api.domain.article.controller;
 
 import com.example.rest_api.domain.article.dto.ArticleDTO;
 import com.example.rest_api.domain.article.entity.Article;
-import com.example.rest_api.domain.article.request.ArticleCreateRequest;
-import com.example.rest_api.domain.article.request.ArticleCreateResponse;
-import com.example.rest_api.domain.article.request.ArticleModifyRequest;
-import com.example.rest_api.domain.article.request.ArticleModifyResponse;
-import com.example.rest_api.domain.article.response.ArticleResponse;
-import com.example.rest_api.domain.article.response.ArticlesResponse;
+import com.example.rest_api.domain.article.dto.request.ArticleCreateRequest;
+import com.example.rest_api.domain.article.dto.request.ArticleCreateResponse;
+import com.example.rest_api.domain.article.dto.request.ArticleModifyRequest;
+import com.example.rest_api.domain.article.dto.request.ArticleModifyResponse;
+import com.example.rest_api.domain.article.dto.response.ArticleResponse;
+import com.example.rest_api.domain.article.dto.response.ArticlesResponse;
 import com.example.rest_api.domain.article.service.ArticleService;
 import com.example.rest_api.global.RsData.RsData;
 import io.swagger.v3.oas.annotations.Operation;

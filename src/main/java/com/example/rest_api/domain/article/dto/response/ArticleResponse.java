@@ -1,4 +1,4 @@
-package com.example.rest_api.domain.article.response;
+package com.example.rest_api.domain.article.dto.response;
 
 import com.example.rest_api.domain.article.dto.ArticleDTO;
 import lombok.AllArgsConstructor;

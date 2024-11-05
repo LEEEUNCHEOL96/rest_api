@@ -1,9 +1,10 @@
 package com.example.rest_api.domain.member.controller;
 
-import com.example.rest_api.domain.member.dto.MemberDTO;
+import com.example.rest_api.domain.member.dto.reponse.MemberResponse;
 import com.example.rest_api.domain.member.entity.Member;
-import com.example.rest_api.domain.member.request.MemberRequest;
+import com.example.rest_api.domain.member.dto.request.MemberRequest;
 import com.example.rest_api.domain.member.service.MemberService;
+import com.example.rest_api.global.RsData.RsData;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
@@ -22,10 +23,9 @@ public class ApiV1MemberController {
     private final MemberService memberService;
 
     @PostMapping("/join")
-    public ResponseEntity<MemberDTO> join (@Valid @RequestBody MemberRequest memberRequest) {
+    public RsData<MemberResponse> join (@Valid @RequestBody MemberRequest memberRequest) {
         Member member = this.memberService.join(memberRequest.getUsername(), memberRequest.getPassword());
-
-        return ResponseEntity.ok(new MemberDTO(member));
+        return RsData.of("200", "회원가입이 완료되었습니다.", new MemberResponse(member));
     }
 
     @PostMapping("/login")

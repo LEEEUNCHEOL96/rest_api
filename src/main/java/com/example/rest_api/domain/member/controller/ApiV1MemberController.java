@@ -7,12 +7,17 @@ import com.example.rest_api.domain.member.service.MemberService;
 import com.example.rest_api.global.RsData.RsData;
 import com.example.rest_api.global.jwt.JwtProvider;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Map;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
@@ -31,12 +36,27 @@ public class ApiV1MemberController {
     }
 
     @PostMapping("/login")
-    public RsData<?> login (@Valid @RequestBody MemberRequest memberRequest) {
-        Member member = this.memberService.getMember(memberRequest.getUsername());
-        // accessToken 발급
-        String token = jwtProvider.genAccessToken(member);
+    public RsData<MemberResponse> login (@Valid @RequestBody MemberRequest memberRequest, HttpServletResponse res) {
 
-        return RsData.of("200", "토큰 발급 성공", token);
+        Member member = this.memberService.getMember(memberRequest.getUsername());
+        String accessToken = jwtProvider.genAccessToken(member);
+        res.addCookie(new Cookie("accessToken", accessToken));
+
+        return RsData.of("200", "토큰 발급 성공: " + accessToken , new MemberResponse(member));
+    }
+    @GetMapping("/me")
+    public RsData<MemberResponse> me (HttpServletRequest req) {
+        Cookie[] cookies = req.getCookies();
+        String accessToken = "";
+        for (Cookie cookie : cookies) {
+            if ("accessToken".equals(cookie.getName())) {
+                accessToken = cookie.getValue();
+            }
+        }
+        Map<String, Object> claims =  jwtProvider.getClaims(accessToken);
+        String username = (String) claims.get("username");
+        Member member = this.memberService.getMember(username);
+        return RsData.of("200", "내 회원정보", new MemberResponse(member));
     }
     
 

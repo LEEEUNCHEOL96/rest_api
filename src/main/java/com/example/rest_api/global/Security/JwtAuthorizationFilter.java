@@ -3,6 +3,7 @@ package com.example.rest_api.global.Security;
 import com.example.rest_api.domain.member.service.MemberService;
 import com.example.rest_api.global.RsData.RsData;
 import jakarta.servlet.FilterChain;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;

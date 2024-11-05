@@ -20,7 +20,7 @@ import java.util.List;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @RestController // JSON 형태로 응답을 반환함
-@RequestMapping(value = "/api/v1/articles", produces = APPLICATION_JSON_VALUE, consumes = APPLICATION_JSON_VALUE)
+@RequestMapping(value = "/api/v1/articles")
 @RequiredArgsConstructor
 @Tag(name = "ApiV1ArticleController", description = "게시글 CRUD API")
 public class ApiV1ArticleController {

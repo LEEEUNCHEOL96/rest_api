@@ -1,3 +1,8 @@
 export default function ArticleList() {
-    return <>게시글 목록</>
+    return <>
+        <ul>
+            <li>1</li>
+            <li>2</li>
+        </ul>
+    </>
 }

@@ -3,9 +3,9 @@ package com.example.rest_api.domain.article.controller;
 import com.example.rest_api.domain.article.dto.ArticleDTO;
 import com.example.rest_api.domain.article.entity.Article;
 import com.example.rest_api.domain.article.dto.request.ArticleCreateRequest;
-import com.example.rest_api.domain.article.dto.request.ArticleCreateResponse;
+import com.example.rest_api.domain.article.dto.response.ArticleCreateResponse;
 import com.example.rest_api.domain.article.dto.request.ArticleModifyRequest;
-import com.example.rest_api.domain.article.dto.request.ArticleModifyResponse;
+import com.example.rest_api.domain.article.dto.response.ArticleModifyResponse;
 import com.example.rest_api.domain.article.dto.response.ArticleResponse;
 import com.example.rest_api.domain.article.dto.response.ArticlesResponse;
 import com.example.rest_api.domain.article.service.ArticleService;
@@ -16,8 +16,6 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
-
-import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @RestController // JSON 형태로 응답을 반환함
 @RequestMapping(value = "/api/v1/articles")
